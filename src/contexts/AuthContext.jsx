@@ -57,6 +57,8 @@ const AuthProvider = ({ children }) => {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
+            const usePrimaryBackend = true; // Replace with a real condition if needed
+
             // Fetch user details from MongoDB by email
             const backendURL = usePrimaryBackend
             ? `https://roomquest-backend.vercel.app/api/v1/user/get-user-by-email/${user.email}`
