@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "clean": "rm -rf node_modules && rm -f package-lock.json && npm install",
-    "postinstall": "chmod -R +x node_modules/.bin"
+    "postinstall": "chmod -R +x node_modules/.bin",
+    "proxy": "https://roomquest-backend.vercel.app"
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
