@@ -58,7 +58,12 @@ const AuthProvider = ({ children }) => {
             const user = userCredential.user;
 
             // Fetch user details from MongoDB by email
-            const response = await axios.get(`http://localhost:5000/api/v1/user/get-user-by-email/${email}`);
+            const backendURL = usePrimaryBackend
+            ? `https://roomquest-backend.vercel.app/api/v1/user/get-user-by-email/${user.email}`
+            : `http://localhost:5000/api/v1/user/get-user-by-email/${user.email}`;
+            
+            const response = await axios.get(backendURL);
+
             if (response.status === 200) {
                 const data = response.data;
                 setCurrentUser(user);
