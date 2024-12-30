@@ -20,7 +20,13 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 try {
-                    const response = await axios.get(`http://localhost:5000/api/v1/user/get-user-by-email/${user.email}`);
+                    const usePrimaryBackend = true; // Replace with a real condition if needed
+
+                    const backendURL = usePrimaryBackend
+                        ? `https://roomquest-backend.vercel.app/api/v1/user/get-user-by-email/${user.email}`
+                        : `http://localhost:5000/api/v1/user/get-user-by-email/${user.email}`;
+                    
+                    const response = await axios.get(backendURL);
                     if (response.status === 200) {
                         const data = response.data;
                         setCurrentUser(user);
