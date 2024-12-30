@@ -76,8 +76,12 @@ const Login = () => {
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-
-            const response = await axios.get(`http://localhost:5000/api/v1/user/get-user-by-email/${user.email}`);
+            
+            const backendURL = usePrimaryBackend
+            ? `https://roomquest-backend.vercel.app/api/v1/user/get-user-by-email/${user.email}`
+            : `http://localhost:5000/api/v1/user/get-user-by-email/${user.email}`;
+        
+            const response = await axios.get(backendURL);
             const userDoc = response.data;
 
             if (userDoc) {
